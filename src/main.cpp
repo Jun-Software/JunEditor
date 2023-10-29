@@ -28,65 +28,19 @@ int main() {
     while (ch = getch()) {
         system("cls");
         if (ch == esc) {
-            cout << "> |";
+            cout << "> ";
             string command;
-            int command_index = 0;
-            while (ch = getch()) {
-                system("cls");
-                if (ch == esc) {
-                    break;
-                }
-                else if (ch == enter) {
-                    map<string, void(*)()>::iterator it;
-                    it = functions.find(command);
-                    if (it != functions.end()) {
-                        functions[command]();
-                    }
-                    else {
-                        functions["help"]();
-                    }
-                    command = "";
-                    command_index = 0;
-                }
-                else if (ch == ' ') {
-                    map<string, void(*)()>::iterator it;
-                    it = functions.find(command);
-                    if (it != functions.end()) {
-                        functions[command]();
-                    }
-                    else {
-                        functions["help"]();
-                    }
-                    command = "";
-                    command_index = 0;
-                }
-                else if (ch == back) {
-                    command.erase(command.begin() + command_index - 1);
-                    command_index = max(command_index - 1, 0);
-                }
-                else if (ch == -32) {
-                    ch = getch();
-                    if (ch == 75) {
-                        command_index = max(command_index - 1, 0);
-                    }
-                    else if (ch == 77) {
-                        command_index = min(command_index + 1, int(command.size()));
-                    }
-                }
-                else {
-                    string str;
-                    str += ch;
-                    command.insert(command_index, str);
-                    command_index = min(command_index + 1, int(command.size()));
-                }
-                cout << "> ";
-                for (int i = 0; i <= command.size(); i++) {
-                    if (i == command_index) {
-                        cout << '|';
-                    }
-                    cout << command[i];
-                }
+            cin >> command;
+            map<string, void(*)()>::iterator it;
+            it = functions.find(command);
+            if (it != functions.end()) {
+                functions[command]();
             }
+            else {
+                functions["help"]();
+            }
+            Sleep(3000);
+            system("cls");
         }
         else if (ch == enter) {
             buffer.insert(index, "\n");
@@ -112,7 +66,7 @@ int main() {
                 index = max(index - 1, 1);
             }
             else if (ch == 77) {
-                index = min(index + 1, int(buffer.size()));
+                index = min(index + 1, int(buffer.size()) - 1);
             }
             if (index == -1) {
                 index = 1;
@@ -122,7 +76,7 @@ int main() {
             string str;
             str += ch;
             buffer.insert(index, str);
-            index = min(index + 1, int(buffer.size()));
+            index = min(index + 1, int(buffer.size()) - 1);
         }
         for (int i = 1; i <= buffer.size(); i++) {
             if (i == index) {

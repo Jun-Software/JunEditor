@@ -5,5 +5,6 @@ using namespace std;
 void help() {
     cout << "quit\tExit JunEditor\n"
             "exit\tExit JunEditor\n"
-            "help\tView this list\n";
+            "help\tView this list\n"
+            "save\tSave the file\n";
 }

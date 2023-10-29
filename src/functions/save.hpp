@@ -1,7 +1,7 @@
 #include <fstream>
 void save() {
     string str;
-    cout << "> save ";
+    cout << "> filename: ";
     cin >> str;
     ofstream out_file;
     out_file.open(str.c_str());
